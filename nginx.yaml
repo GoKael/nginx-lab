@@ -14,11 +14,24 @@ spec:
         image: gcr.io/multi-k8s-ict/nginx-image:latest
         ports:
         - containerPort: 80
-#        volumeMounts:
-#        - name: config-volume
-#          mountPath: /etc/nginx/conf.d/proxy.conf
-#          readOnly: true
-#      volumes:
-#        - name: config-volume
-#          configMap:
-#            name: special-config
+        #livenessProbe:
+        #  exec:
+        #    command:
+        #    - ps aux | grep nginx
+        #  initialDelaySeconds: 10
+        #  periodSeconds: 5
+        #  timeoutSeconds: 3
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/nginx/extra
+          readOnly: true
+      volumes:
+        - name: config-volume
+          configMap:
+            name: special-config

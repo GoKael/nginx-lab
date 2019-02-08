@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ing
+  #namespace: ingress
+  annotations:
+    #kubernetes.io/ingress.global-static-ip-name: "kubernetes-ingress"
+    kubernetes.io/ingress.class: "nginx"
+    #kubernetes.io/ingress.class: "public"
+    #nginx.ingress.kubernetes.io/rewrite-target: /
+    #nginx.ingress.kubernetes.io/add-base-url: "true"
+spec:
+        backend:
+          serviceName: my-svc
+          servicePort: 80
+       # path: /?(.*)

@@ -135,9 +135,9 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
-COPY ./conf/proxy.conf /etc/nginx/proxy.conf
-COPY ./conf/http.conf /etc/nginx/conf.d/http.conf
-COPY ./conf/nginx.vh.default.conf /etc/nginx/conf.d/default.conf
+#COPY ./conf/proxy.conf /etc/nginx/proxy.conf
+COPY ./conf/http.conf /etc/nginx/http.conf
+#COPY ./conf/nginx.vh.default.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 

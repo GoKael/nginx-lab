@@ -6,10 +6,25 @@ metadata:
 data:
   proxy.conf: |
     #Return 404 if no server name matches
+    #server {
+    #listen 80 default_server;
+    #    server_name "";
+    #    return 503 "No server is currently configured for the requested host.";
+    #}
+    #server {
+    #listen 80 default_server;
+    #  location / {
+    #    access_log off;
+    #    return 503 "NOOOOOOOOOOO\n";
+    #  }
+    #}
     server {
     listen 80 default_server;
-        server_name "";
-        return 503 "No server is currently configured for the requested host.";
+
+      location /healthz {
+        access_log off;
+        return 200 "healthy\n";
+      }
     }
     
     upstream kaelgo {
@@ -20,16 +35,21 @@ data:
       server kaelgogo.ccdior.com:443;
     }
     
+    #server {
+    #listen 80;
+    #       location /test {
+    #       return 200 "okok\n";
+    #       }
+    #}
     server {
     listen 80;
            server_name kaelsite1.ccdior.com;
-    
            location /
            {
                   proxy_pass https://kaelgo;
            }
-           root /var/www/test1;
-           index index.html;
+           #root /var/www/test1;
+           #index index.html;
     }
     server {
     listen 80;
